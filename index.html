@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedTheBlock NYC</title>
+  </head>
+  <body>
+
+    <!-- top of the page: logo + menu (later in React: a <Header /> component) -->
+    <header>
+      <!-- the logo. "alt" describes the image for people who can't see it -->
+      <img src="images/logo.png" alt="FeedTheBlock NYC logo" width="80">
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="#our-purpose">Our Purpose</a>
+        <a href="#impact">Impact</a>
+        <a href="about.html">About Us</a>
+        <a href="#donate">Donate</a>
+      </nav>
+    </header>
+
+    <main>
+
+      <!-- "hero" = the big first thing people see -->
+      <section id="hero">
+        <h1>Feeding NYC, one block at a time.</h1>
+        <p>Your donation buys real food that we hand out to our unhoused neighbors, right here in New York City.</p>
+        <a href="#donate">Donate Now</a>
+      </section>
+
+      <!-- how it works: 3 simple steps -->
+      <section id="our-purpose">
+        <h2>Our Purpose</h2>
+        <p>Ever walked past someone on the train asking for a dollar and hesitated, not sure where that dollar would really go? We get it. Most of us want to help. We just want to know our money is actually doing some good.</p>
+        <p>That's why we started FeedTheBlock NYC. We're New Yorkers who wanted a simple, honest way to look out for our unhoused neighbors. You give, we buy the food, and we hand it out ourselves, right here on our streets. No middleman, no guessing. Every food run gets posted, so you can see exactly where your money went.</p>
+       
+        <ol>
+          <li>
+            <h3>You donate</h3>
+            <p>Any amount helps. Even $5 makes a difference.</p>
+          </li>
+          <li>
+            <h3>We buy food</h3>
+            <p>Bread, turkey, peanut butter, jelly, water, and more.</p>
+          </li>
+          <li>
+            <h3>We hand it out</h3>
+            <p>We go out on the streets of NYC and post proof of every food run.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- show what the money buys, this builds trust -->
+      <section id="donate">
+        <h2>Donate</h2>
+        <p>Every dollar goes to food. Here's what your donation can do:</p>
+        <ul>
+          <li><strong>$5</strong> feeds [X] people</li>
+          <li><strong>$10</strong> feeds [X] people</li>
+          <li><strong>$25</strong> feeds [X] people</li>
+        </ul>
+        <!-- this button does nothing yet, we connect payments later -->
+        <button>Donate</button>
+        <p><em>Note: FeedTheBlock NYC is not a registered nonprofit, so donations are not tax-deductible.</em></p>
+      </section>
+
+      <!-- proof: numbers from food runs -->
+      <section id="impact">
+        <h2>Our Impact</h2>
+        <p><strong>0</strong> meals given out so far</p>
+        <p><strong>$0</strong> raised, <strong>$0</strong> spent on food</p>
+        <p>Our first food run is coming soon. Follow us to see it!</p>
+      </section>
+
+    </main>
+
+    <!-- bottom of the page (later in React: a <Footer /> component) -->
+    <footer>
+      <p>Follow us:
+        <a href="https://www.instagram.com/feedtheblocknyc">Instagram</a>
+        <a href="https://www.facebook.com/feedtheblocknyc">Facebook</a>
+      </p>
+      <p>Contact: <a href="mailto:FeedTheBlockNYC@gmail.com">FeedTheBlockNYC@gmail.com</a></p>
+      <p>&copy; 2026 FeedTheBlock NYC</p>
+    </footer>
+
+  </body>
+</html>
