@@ -13,19 +13,56 @@
   </head>
   <body>
 
-    <!-- ===== HEADER: logo + menu (same on every page) ===== -->
+    <!-- ===== HEADER: logo (left), menu (center), language (right) ===== -->
     <header class="site-header">
-      <!-- clicking the logo goes back home -->
+
+      <!-- LEFT: CHANGED: the icon version of the logo (no text),
+           so it's easy to see even when it's small -->
       <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="FeedTheBlock NYC logo" width="44">
-        <span>FeedTheBlock <span class="accent-text">NYC</span></span>
+        <img src="images/logo-icon.png" alt="FeedTheBlock NYC home" width="60">
       </a>
+
+      <!-- CENTER: the menu -->
       <nav class="main-nav">
+        <a href="index.html">Home</a>
         <a href="purpose.html">Our Purpose</a>
         <a href="impact.html">Impact</a>
         <a href="about.html">About Us</a>
         <a href="donate.html" class="button">Donate</a>
       </nav>
+
+      <!-- RIGHT: language picker.
+           it doesn't translate yet, JavaScript will do that later -->
+      <div class="language-picker">
+        <!-- small globe icon. aria-hidden = screen readers skip it -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M2 12h20"></path>
+          <path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"></path>
+        </svg>
+
+        <!-- the label is hidden on screen, but screen readers read it out loud -->
+        <label for="language" class="visually-hidden">Choose a language</label>
+
+        <!-- each language is written in its OWN language,
+             so people can find it even if they can't read English -->
+        <select id="language" name="language">
+          <option value="en" selected>English</option>
+          <option value="es">Español</option>
+          <option value="zh">中文</option>
+          <option value="ru">Русский</option>
+          <option value="bn">বাংলা</option>
+          <option value="ht">Kreyòl Ayisyen</option>
+          <option value="ko">한국어</option>
+          <option value="pl">Polski</option>
+          <option value="fr">Français</option>
+          <option value="ur">اردو</option>
+          <option value="ar">العربية</option>
+          <option value="hi">हिन्दी</option>
+          <option value="ne">नेपाली</option>
+        </select>
+      </div>
+
     </header>
 
     <!-- main grows to fill the empty space, so the footer sits at the bottom -->
@@ -33,36 +70,26 @@
 
       <!-- ===== HERO: the first thing people see ===== -->
       <section class="hero">
-        <!-- left side: words + buttons + counters -->
         <div class="hero-text">
-          <h1>Feeding NYC, one block at a time.</h1>
-          <p>Your donation buys real food that we hand out to our unhoused neighbors, right here in New York City. Every run gets posted, so you see where it went.</p>
 
-          <div class="hero-buttons">
-            <a href="donate.html" class="button">Donate now</a>
-            <a href="purpose.html" class="button button-outline">See how it works</a>
-          </div>
+          <!-- the name is the big main title of the page -->
+          <h1>FeedTheBlock <span class="accent-text">NYC</span></h1>
 
-          <!-- the 3 counters. we update these numbers after every food run -->
-          <div class="stats">
-            <div class="stat">
-              <span class="stat-number">0</span>
-              <span class="stat-label">meals handed out</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">$0</span>
-              <span class="stat-label">raised from donors</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">$0</span>
-              <span class="stat-label">spent on food</span>
-            </div>
-          </div>
-        </div>
+          <!-- the slogan, in Knicks blue -->
+          <p class="tagline">Feeding NYC, one block at a time.</p>
 
-        <!-- right side: the big logo picture -->
-        <div class="hero-image">
-          <img src="images/logo.png" alt="Paper food bag with the NYC skyline and a heart" width="380">
+          <!-- paragraph 1: the feeling every New Yorker knows -->
+          <p>Ever walked past someone on the train asking for a dollar and hesitated, not sure where that dollar would really go? We get it. Most of us want to help. We just want to know our money is actually doing some good.</p>
+
+          <!-- paragraph 2: what we do about it -->
+          <p>That's why we started FeedTheBlock NYC. You give, we buy real food like bread, turkey, peanut butter, jelly, and water, and we hand it out ourselves to our unhoused neighbors, right here on our streets. No middleman, no guessing. Every food run gets posted with photos and receipts, so you see exactly where your money went.</p>
+
+          <!-- paragraph 3: who we are -->
+          <p>We're New Yorkers looking out for New Yorkers. Born in Queens, built for every borough, and powered by people like you who believe a simple meal can make someone's day a little better.</p>
+
+          <!-- the challenge, in bold -->
+          <p class="challenge">Our challenge to New York: give so much that we can't keep up.</p>
+
         </div>
       </section>
 
@@ -70,13 +97,13 @@
 
     <!-- ===== FOOTER: same on every page ===== -->
     <footer class="site-footer">
-      <span class="footer-name">FeedTheBlock NYC</span>
+      <span class="footer-name">FeedTheBlock <span class="accent-text">NYC</span></span>
       <div class="footer-links">
         <a href="https://www.instagram.com/feedtheblocknyc">Instagram</a>
         <a href="https://www.facebook.com/feedtheblocknyc">Facebook</a>
         <a href="mailto:FeedTheBlockNYC@gmail.com">FeedTheBlockNYC@gmail.com</a>
       </div>
-      <span>&copy; 2026 FeedTheBlock NYC</span>
+      <span>&copy; 2026 FeedTheBlock <span class="accent-text">NYC</span></span>
     </footer>
 
   </body>
