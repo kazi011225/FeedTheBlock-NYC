@@ -1,0 +1,323 @@
+/* =========================================================
+   CONTROL PANEL
+   change these to restyle the whole site in one place.
+   "--something" is a CSS variable. use it with var(--something)
+   ========================================================= */
+:root {
+  /* main colors */
+  --accent: #1E3A5F;        /* dark blue: buttons */
+  --accent-dark: #14284A;   /* darker blue: button hover */
+  --accent-light: #BFD4EE;  /* light blue, for hover on dark backgrounds */
+  --logo-orange: #F58426;   /* CHANGED: Knicks orange, matches the new logo */
+
+  /* text colors */
+  --text: #2A1E14;          /* main text (dark brown, matches the logo) */
+  --text-soft: #4A3726;     /* paragraph text, a bit lighter */
+  --text-muted: #6B4A2E;    /* small labels */
+
+  /* backgrounds */
+  --bg: #FFFFFF;            /* page background */
+  --dark: #006BB6;          /* CHANGED: Knicks blue for header + footer, same as the logo */
+
+  /* lines */
+  --border: #E3E8EF;
+
+  /* fonts */
+  --font-heading: 'Archivo Black', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* layout */
+  --max-width: 1360px;      /* content never gets wider than this */
+}
+
+/* =========================================================
+   BASICS: rules for the whole page
+   ========================================================= */
+
+/* makes width and padding easier to calculate */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+
+  /* sticky footer.
+     1. the page is at least as tall as the browser window (100vh) */
+  min-height: 100vh;
+  /* 2. stack header, main, and footer from top to bottom */
+  display: flex;
+  flex-direction: column;
+}
+
+/* main takes ALL the leftover space,
+   which pushes the footer down to the very bottom */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* keeps the hero in the middle of that space */
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+h1, h2 {
+  font-family: var(--font-heading);
+  font-weight: normal;   /* Archivo Black is already thick */
+  line-height: 1.1;
+}
+
+a {
+  color: var(--text);
+}
+
+img {
+  max-width: 100%;       /* images never stick out of their box */
+  height: auto;
+}
+
+/* every section stretches full width (so backgrounds go edge to edge),
+   but the content inside stays in the middle, max 1360px wide */
+.site-header,
+main > section,
+.site-footer {
+  padding-left: max(24px, calc((100% - var(--max-width)) / 2));
+  padding-right: max(24px, calc((100% - var(--max-width)) / 2));
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 26px;
+  border-radius: 999px;      /* big number = fully round ends */
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: #FFFFFF;
+  font-weight: 700;
+  text-decoration: none;     /* remove the underline */
+}
+
+.button:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* the "See how it works" button: see-through with an outline */
+.button-outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.button-outline:hover {
+  background: var(--text);
+  border-color: var(--text);
+  color: #FFFFFF;
+}
+
+/* =========================================================
+   HEADER (the nav bar)
+   ========================================================= */
+.site-header {
+  display: flex;                    /* put logo and menu in one row */
+  flex-wrap: wrap;                  /* on small screens, let them wrap */
+  justify-content: space-between;   /* logo left, menu right */
+  align-items: center;
+  gap: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: var(--dark);          /* Knicks blue, same as the logo */
+  color: #FFFFFF;                   /* white text */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: #FFFFFF;                   /* "FeedTheBlock" in white */
+}
+
+.logo img {
+  border-radius: 50%;     /* round the small logo */
+}
+
+/* "NYC" next to the name, in the logo's orange */
+.accent-text {
+  color: var(--logo-orange);
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 24px;          /* 6px between rows, 24px between links */
+  font-weight: 500;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #FFFFFF;                   /* white menu links */
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+  color: #FFFFFF;                   /* CHANGED: stays white, just underlines (light blue was hard to see on Knicks blue) */
+}
+
+/* the Donate button inside the nav bar */
+.main-nav .button {
+  min-height: 44px;
+  padding: 0 20px;
+  background: #FFFFFF;              /* white button */
+  border-color: #FFFFFF;
+  color: var(--dark);               /* Knicks blue text on the white button */
+}
+
+.main-nav .button:hover {
+  text-decoration: none;
+  background: var(--accent-light);  /* light blue on hover */
+  border-color: var(--accent-light);
+  color: var(--accent-dark);        /* CHANGED: darker text so it's readable on light blue */
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+/* flex: 3 1 520px means: take 3 parts of the space, can shrink,
+   start at 520px wide. the image below takes 2 parts. */
+.hero-text {
+  flex: 3 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-text p {
+  margin: 0;
+  font-size: 19px;
+  color: var(--text-soft);
+  max-width: 620px;
+}
+
+.hero h1 {
+  font-size: 60px;
+  line-height: 1.02;
+  letter-spacing: -1px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* the 3 counters in a row */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 15px;
+  color: var(--text-soft);
+}
+
+.hero-image {
+  flex: 2 1 320px;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 380px;
+  border-radius: 50%;     /* turns the square logo into a circle */
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  background: var(--dark);       /* Knicks blue, same as the logo */
+  color: #FFFFFF;                /* white text */
+  font-size: 15px;
+}
+
+.footer-name {
+  font-family: var(--font-heading);
+  font-size: 18px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.site-footer a {
+  color: #FFFFFF;
+}
+
+/* CHANGED: footer links just lose their underline on hover
+   (light blue was hard to see on Knicks blue) */
+.site-footer a:hover {
+  text-decoration: none;
+}
+
+/* =========================================================
+   PHONES: smaller text when the screen is narrow
+   (@media = "only use these rules when...")
+   ========================================================= */
+@media (max-width: 700px) {
+  .hero h1 {
+    font-size: 40px;
+  }
+}
