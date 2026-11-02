@@ -29,7 +29,7 @@
                                nav bar, body, and footer */
   --text-width: 1200px;     /* how wide the paragraphs can get.
                                make it smaller for narrower text */
-  --skyline-width: 560px;   /* how wide the skyline picture can get */
+  --skyline-width: 460px;   /* how wide the skyline picture can get */
   --station-width: 900px;   /* how wide the train station can get */
 }
 
@@ -142,7 +142,8 @@ main > section,
 /* the Donate button under paragraph 3, on the cream page:
    white with a Knicks blue outline, turns orange on hover (from .button above) */
 .donate-cta {
-  margin-top: -4px;           /* a little closer to the paragraph */
+  min-height: 42px;           /* a bit slimmer than the normal button */
+  padding: 0 24px;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -273,8 +274,8 @@ main > section,
 .hero {
   display: flex;
   justify-content: center;
-  padding-top: 16px;
-  padding-bottom: 40px;
+  padding-top: 10px;
+  padding-bottom: 6px;
   text-align: center;
 }
 
@@ -286,7 +287,7 @@ main > section,
   display: flex;
   flex-direction: column;
   align-items: center;     /* center everything inside */
-  gap: 18px;               /* space between each line or paragraph */
+  gap: 12px;               /* space between each line or paragraph */
 }
 
 /* the big name "FeedTheBlock NYC" */
@@ -297,9 +298,9 @@ main > section,
 }
 
 /* the slogan under the name, in Knicks blue.
-   the negative margins pull it closer to the name and the paragraph */
+   the negative top margin pulls it closer to the name */
 .hero-text .tagline {
-  margin: -10px 0 -18px;
+  margin: -6px 0 -2px;
   font-size: 20px;
   line-height: 1.6;
   font-weight: 700;
@@ -310,28 +311,21 @@ main > section,
 .hero-text p {
   margin: 0;
   font-size: 17px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-soft);
   max-width: var(--text-width);
 }
 
-/* the challenge line at the end: a bit bigger and bold */
-.hero-text .challenge {
-  margin-top: 6px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-}
 
 /* =========================================================
-   SKYLINE DIVIDER (between paragraph 1 and 2)
+   SKYLINE (right under the tagline)
    ========================================================= */
 .skyline-block {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .skyline {
@@ -391,7 +385,8 @@ main > section,
 
 /* the hidden svg with the shared train parts.
    "absolute" takes it out of the layout, so it doesn't leave an empty line */
-.train-parts {
+.train-parts,
+.svg-defs {
   position: absolute;
 }
 
@@ -575,6 +570,116 @@ main > section,
 }
 
 /* =========================================================
+   NEW: BARS FOR THE BLOCK (the quote section)
+   ========================================================= */
+.bars {
+  width: 100%;
+  max-width: 1120px;       /* wide, so each quote fits on one line */
+}
+
+.bars-title {
+  margin-bottom: 4px;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--accent);    /* BARS FOR in blue, THE BLOCK in orange (accent-text) */
+}
+
+/* [ candy ] [ quote ] [ candy ] in one row */
+.bars-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.quote-box {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;        /* hides the quote while it slides in and out */
+}
+
+.hero-text .quote {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* the curly quotation marks, in Knicks blue.
+   ::before and ::after add them around the text, so the JSON file doesn't need them */
+.quote::before {
+  content: "\201C";
+  margin-right: 2px;
+  font-family: var(--font-heading);
+  color: var(--accent);
+}
+.quote::after {
+  content: "\201D";
+  margin-left: 2px;
+  font-family: var(--font-heading);
+  color: var(--accent);
+}
+
+/* the name under the quote: blue for famous people */
+.hero-text .who {
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* orange for our own quotes */
+.hero-text .who.ours {
+  color: var(--logo-orange);
+}
+
+/* the slide animations when you click a candy bar */
+.slide-out-left  { animation: slide-out-left 0.18s ease-in forwards; }
+.slide-out-right { animation: slide-out-right 0.18s ease-in forwards; }
+.slide-in-left   { animation: slide-in-left 0.25s ease-out; }
+.slide-in-right  { animation: slide-in-right 0.25s ease-out; }
+
+@keyframes slide-out-left  { to   { opacity: 0; transform: translateX(-30px); } }
+@keyframes slide-out-right { to   { opacity: 0; transform: translateX(30px); } }
+@keyframes slide-in-left   { from { opacity: 0; transform: translateX(30px); } }
+@keyframes slide-in-right  { from { opacity: 0; transform: translateX(-30px); } }
+
+/* the candy bar buttons */
+.candy {
+  flex-shrink: 0;          /* never get squished */
+  padding: 4px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.candy svg {
+  display: block;
+  width: 104px;
+  height: auto;
+  filter: drop-shadow(0 3px 0 rgba(42, 30, 20, 0.18));   /* small shadow under the bar */
+}
+
+/* on hover, the candy bars tilt a little, each one outward */
+.candy-prev:hover { transform: rotate(-6deg) scale(1.06); }
+.candy-next:hover { transform: rotate(6deg) scale(1.06); }
+
+/* a little squish when you click */
+.candy:active { transform: scale(0.94); }
+
+/* an orange outline when someone uses the Tab key to reach the button */
+.candy:focus-visible {
+  outline: 3px solid var(--logo-orange);
+  outline-offset: 2px;
+}
+
+/* =========================================================
    FOOTER
    same 3-column grid as the header, so the links are truly centered
    ========================================================= */
@@ -583,8 +688,8 @@ main > section,
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 20px;
-  padding-top: 18px;
-  padding-bottom: 18px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   background: var(--dark);                   /* Knicks blue */
   color: #FFFFFF;
   font-size: 15px;
@@ -647,6 +752,21 @@ main > section,
   .station.go .spin,
   .station.go .t-headlight {
     animation: none;
+  }
+
+  /* quotes just switch, no slide. candy bars don't tilt */
+  .slide-out-left,
+  .slide-out-right,
+  .slide-in-left,
+  .slide-in-right {
+    animation: none;
+  }
+
+  .candy,
+  .candy-prev:hover,
+  .candy-next:hover {
+    transition: none;
+    transform: none;
   }
 }
 
@@ -714,6 +834,26 @@ main > section,
 
   .platform-labels {
     display: grid;
+  }
+
+  /* quotes: the quote on top, the two candy bars side by side under it */
+  .bars-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 22px;
+  }
+
+  .quote-box {
+    flex: 1 1 100%;
+    order: -1;               /* moves the quote above the candy bars */
+  }
+
+  .hero-text .quote {
+    font-size: 17px;
+  }
+
+  .candy svg {
+    width: 96px;
   }
 
   /* bigger numbers in the phone train (it has no labels inside) */
