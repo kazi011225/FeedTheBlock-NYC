@@ -18,6 +18,26 @@ if (bars) {
   let quotes = [];   // the full list, after shuffling
   let current = 0;   // which quote is showing right now
 
+  // NEW: a hidden copy of the quote, used only to measure how wide a quote will be
+  const measure = document.createElement('div');
+  measure.className = 'quote-measure';
+  measure.setAttribute('aria-hidden', 'true');
+  measure.innerHTML = '<p class="quote"></p><p class="who"></p>';
+  bars.appendChild(measure);
+
+  // NEW: measures the quote, then sets the box to that width.
+  // the candy bars sit right next to the box, so they glide in or out with it
+  function fitWidth() {
+    const q = quotes[current];
+    measure.querySelector('.quote').textContent = q.text;
+    measure.querySelector('.who').textContent = '(' + q.author + ')';
+    const width = Math.max(
+      measure.querySelector('.quote').offsetWidth,
+      measure.querySelector('.who').offsetWidth
+    );
+    bars.style.setProperty('--quote-width', (width + 8) + 'px');
+  }
+
   // shuffles a list into a random order (the "Fisher-Yates" shuffle).
   // it walks backwards through the list and swaps each item
   // with a random item before it
@@ -74,6 +94,7 @@ if (bars) {
       // the % (remainder) makes it loop: after the last quote, back to the first
       current = (current + step + quotes.length) % quotes.length;
       showQuote();
+      fitWidth();   // NEW: the box (and the candy bars) move to fit the new quote
       quoteInner.className = 'quote-inner ' + (step > 0 ? 'slide-in-left' : 'slide-in-right');
     }, 180);
   }
@@ -85,6 +106,8 @@ if (bars) {
       quotes = buildOrder(data);   // a new random order on every page load
       current = 0;
       showQuote();
+      document.fonts.ready.then(fitWidth);   // measure after the fonts finish loading
+      window.addEventListener('resize', fitWidth);
       prevButton.addEventListener('click', () => move(-1));
       nextButton.addEventListener('click', () => move(1));
     })

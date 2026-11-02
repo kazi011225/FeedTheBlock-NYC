@@ -593,11 +593,18 @@ main > section,
 .bars-row {
   display: flex;
   align-items: center;
+  justify-content: center;   /* NEW: candy bars + quote stay together in the middle */
   gap: 14px;
 }
 
 .quote-box {
-  flex: 1;
+  /* NEW: the box is only as wide as the quote.
+     JavaScript measures each quote and sets --quote-width.
+     the transition makes the width change smoothly,
+     so the candy bars glide in and out to hug the quote */
+  flex: 0 1 auto;
+  width: var(--quote-width, auto);
+  transition: width 0.35s ease;
   min-width: 0;
   min-height: 46px;
   display: flex;
@@ -612,6 +619,7 @@ main > section,
   line-height: 1.35;
   font-weight: 700;
   color: var(--text);
+  white-space: nowrap;       /* NEW: keep each quote on one line (computer) */
 }
 
 /* the curly quotation marks, in Knicks blue.
@@ -635,6 +643,16 @@ main > section,
   font-size: 14px;
   font-weight: 700;
   color: var(--accent);
+  white-space: nowrap;
+}
+
+/* NEW: a hidden copy of the quote that JavaScript uses to measure the width.
+   it sits far off the screen and is invisible */
+.quote-measure {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  visibility: hidden;
 }
 
 /* the slide animations when you click a candy bar */
@@ -768,6 +786,10 @@ main > section,
     transition: none;
     transform: none;
   }
+
+  .quote-box {
+    transition: none;
+  }
 }
 
 /* =========================================================
@@ -846,6 +868,12 @@ main > section,
   .quote-box {
     flex: 1 1 100%;
     order: -1;               /* moves the quote above the candy bars */
+    width: auto;             /* phones: no width animation, the quote can wrap */
+  }
+
+  .hero-text .quote,
+  .hero-text .who {
+    white-space: normal;
   }
 
   .hero-text .quote {
