@@ -376,6 +376,7 @@ main > section,
 /* the station wall: white subway tiles.
    two thin lines repeat every 48px x 24px, which draws the tile grid */
 .station {
+  position: relative;   /* NEW: so the replay button can sit in the corner */
   width: 100%;
   max-width: var(--station-width);
   background-color: #F7F5F0;
@@ -383,8 +384,48 @@ main > section,
     linear-gradient(#D3CEC4 2px, transparent 2px),
     linear-gradient(90deg, #D3CEC4 2px, transparent 2px);
   background-size: 48px 24px;
+  background-position: right 0 top 0;   /* NEW: tiles line up from the right edge,
+                                           so the replay button always sits inside one tile */
   border-radius: 6px;
   overflow: hidden;     /* hides the train while it's still off the edge */
+}
+
+/* NEW: the replay button in the top right corner of the wall.
+   a round Knicks blue button with a white arrow.
+   hidden at first, it only shows once JavaScript adds "ready" to the station */
+.replay-train {
+  position: absolute;
+  top: 27px;               /* centered inside the second tile from the right */
+  right: 61px;
+  z-index: 2;              /* stays on top of the tiles */
+  width: 20px;
+  height: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1.5px solid #FFFFFF;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(42, 30, 20, 0.2);
+  transition: background-color 0.15s ease, transform 0.3s ease;
+}
+
+.station.ready .replay-train {
+  display: flex;
+}
+
+/* on hover: orange, and the arrow spins a little */
+.replay-train:hover {
+  background: var(--logo-orange);
+  transform: rotate(-90deg);
+}
+
+.replay-train:focus-visible {
+  outline: 3px solid var(--logo-orange);
+  outline-offset: 2px;
 }
 
 /* the hidden svg with the shared train parts.
@@ -887,6 +928,12 @@ main > section,
   /* bigger numbers in the phone train (it has no labels inside) */
   .train-phone .t-num      { font-size: 44px; }
   .train-phone .t-num.main { font-size: 56px; }
+
+  /* phones: the sign is wider than the screen space, so the replay button
+     moves one tile to the right (the tile in the very corner) */
+  .replay-train {
+    right: 13px;
+  }
 
   .frieze {
     height: 16px;

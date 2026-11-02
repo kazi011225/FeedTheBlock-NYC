@@ -47,16 +47,32 @@ if (station && !lessMotion) {
   station.classList.add('ready');
   numbers.forEach((el) => showNumber(el, 0));
 
+  // plays the whole thing: the sign slides in, the train pulls in, the numbers count up
+  let countTimer;
+  function play() {
+    clearTimeout(countTimer);                     // cancel a count that hasn't started yet
+    numbers.forEach((el) => showNumber(el, 0));   // numbers back to 0
+    station.classList.remove('go');               // reset the animation...
+    void station.offsetWidth;                     // ...this line makes the browser notice the reset
+    station.classList.add('go');                  // CSS starts the sign + train animation
+    countTimer = setTimeout(countUp, 2900);       // count up after the train stops
+  }
+
   // step 2: wait until the station scrolls into view (40% of it showing)
   const watcher = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        station.classList.add('go');      // CSS starts the sign + train animation
-        setTimeout(countUp, 2900);        // count up after the train stops
-        watcher.disconnect();             // only play it once
+        play();
+        watcher.disconnect();             // only play it once by itself
       }
     });
   }, { threshold: 0.4 });
 
   watcher.observe(station);
+
+  // NEW: the replay button plays it again
+  const replayButton = station.querySelector('.replay-train');
+  if (replayButton) {
+    replayButton.addEventListener('click', play);
+  }
 }
