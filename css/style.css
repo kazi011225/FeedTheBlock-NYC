@@ -29,6 +29,8 @@
                                nav bar, body, and footer */
   --text-width: 1200px;     /* how wide the paragraphs can get.
                                make it smaller for narrower text */
+  --skyline-width: 560px;   /* how wide the skyline picture can get */
+  --station-width: 900px;   /* how wide the train station can get */
 }
 
 /* =========================================================
@@ -62,7 +64,7 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* keeps the hero in the middle of that space */
+  justify-content: flex-start;   /* the hero starts at the top */
 }
 
 h1, h2, h3 {
@@ -113,8 +115,6 @@ main > section,
 
 /* =========================================================
    BUTTONS
-   (only the nav Donate button uses this right now,
-   but we'll use it on the other pages too)
    ========================================================= */
 
 /* white with Knicks blue words and outline */
@@ -139,6 +139,13 @@ main > section,
   color: var(--text);
 }
 
+/* the Donate button under paragraph 3, on the cream page:
+   white with a Knicks blue outline, turns orange on hover (from .button above) */
+.donate-cta {
+  margin-top: -4px;           /* a little closer to the paragraph */
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
 /* =========================================================
    HEADER (the nav bar)
    ========================================================= */
@@ -152,7 +159,7 @@ main > section,
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 16px;
-  padding-top: 6px;        /* smaller padding, so the bigger logo still fits */
+  padding-top: 6px;
   padding-bottom: 6px;
   background: var(--dark);                      /* Knicks blue */
   color: #FFFFFF;
@@ -165,10 +172,17 @@ main > section,
   display: flex;
 }
 
-/* round logo with an orange ring around it */
+/* round logo with a white ring around it */
 .logo img {
   border-radius: 50%;
-  border: 3px solid var(--logo-orange);
+  border: 3px solid #FFFFFF;
+  transition: border-color 0.15s ease;   /* the color change is smooth */
+}
+
+/* the ring turns orange on hover */
+.logo:hover img,
+.logo:focus-visible img {
+  border-color: var(--logo-orange);
 }
 
 /* CENTER column, the menu */
@@ -226,18 +240,23 @@ main > section,
   min-height: 40px;
   padding: 6px 14px;
   border-radius: 999px;
-  border: 2px solid #FFFFFF;              /* CHANGED: back to white */
+  border: 2px solid #FFFFFF;
   background: transparent;
   color: #FFFFFF;
   font: 500 15px var(--font-body);
   cursor: pointer;
 }
 
-/* CHANGED: added back. the border turns NY orange
-   when you hover over it or click on it */
-.language-picker select:hover,
+/* on hover or click, the globe, the words, and the border all turn orange */
+.language-picker:hover,
+.language-picker:focus-within {
+  color: var(--logo-orange);
+}
+
+.language-picker:hover select,
 .language-picker select:focus {
   border-color: var(--logo-orange);
+  color: var(--logo-orange);
 }
 
 /* the list that opens: dark text on white, so it's readable */
@@ -254,7 +273,7 @@ main > section,
 .hero {
   display: flex;
   justify-content: center;
-  padding-top: 40px;
+  padding-top: 16px;
   padding-bottom: 40px;
   text-align: center;
 }
@@ -270,18 +289,19 @@ main > section,
   gap: 18px;               /* space between each line or paragraph */
 }
 
-/* the big name "FeedTheBlock NYC".
-   clamp(smallest, grows with screen, biggest) */
+/* the big name "FeedTheBlock NYC" */
 .hero h1 {
-  font-size: clamp(44px, 6vw, 36px);
+  font-size: 36px;
   line-height: 1;
   letter-spacing: -1px;
 }
 
-/* the slogan under the name, in Knicks blue */
+/* the slogan under the name, in Knicks blue.
+   the negative margins pull it closer to the name and the paragraph */
 .hero-text .tagline {
-  margin: 0 0 6px;          /* a little extra space under it */
-  font-size: clamp(22px, 2.4vw, 24px);
+  margin: -10px 0 -18px;
+  font-size: 20px;
+  line-height: 1.6;
   font-weight: 700;
   color: var(--accent);
 }
@@ -289,7 +309,7 @@ main > section,
 /* all the paragraphs */
 .hero-text p {
   margin: 0;
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.6;
   color: var(--text-soft);
   max-width: var(--text-width);
@@ -298,18 +318,269 @@ main > section,
 /* the challenge line at the end: a bit bigger and bold */
 .hero-text .challenge {
   margin-top: 6px;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
 }
 
 /* =========================================================
+   SKYLINE DIVIDER (between paragraph 1 and 2)
+   ========================================================= */
+.skyline-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.skyline {
+  width: 100%;
+  max-width: var(--skyline-width);
+  height: auto;
+  display: block;
+}
+
+/* the windows start dark brown, then light up orange, then go dark again */
+.skyline .win {
+  fill: #3B2B1E;
+  animation: lightup 6s ease-in-out infinite;
+}
+
+/* different delays, so the windows don't all light up at once */
+.skyline .win:nth-child(3n)   { animation-delay: 1.2s; }
+.skyline .win:nth-child(3n+1) { animation-delay: 2.6s; }
+.skyline .win:nth-child(4n)   { animation-delay: 4s; }
+
+@keyframes lightup {
+  0%, 30%  { fill: #3B2B1E; }
+  45%, 85% { fill: var(--logo-orange); }
+  100%     { fill: #3B2B1E; }
+}
+
+/* the caption under the skyline */
+.hero-text .skyline-caption {
+  font: 400 22px var(--font-heading);
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.caption-black  { color: var(--text); }
+.caption-orange { color: var(--logo-orange); }
+.caption-blue   { color: var(--accent); }
+
+/* =========================================================
+   NEW: FOOD SECURITY AVE (the stats station)
+   a subway train pulls in and shows the 3 numbers
+   ========================================================= */
+
+/* the station wall: white subway tiles.
+   two thin lines repeat every 48px x 24px, which draws the tile grid */
+.station {
+  width: 100%;
+  max-width: var(--station-width);
+  background-color: #F7F5F0;
+  background-image:
+    linear-gradient(#D3CEC4 2px, transparent 2px),
+    linear-gradient(90deg, #D3CEC4 2px, transparent 2px);
+  background-size: 48px 24px;
+  border-radius: 6px;
+  overflow: hidden;     /* hides the train while it's still off the edge */
+}
+
+/* the hidden svg with the shared train parts.
+   "absolute" takes it out of the layout, so it doesn't leave an empty line */
+.train-parts {
+  position: absolute;
+}
+
+/* the mosaic strip at the top: dark blue little tiles, orange line under it */
+.frieze {
+  height: 16px;
+  margin-bottom: 8px;
+  background-color: var(--accent-dark);
+  background-image: radial-gradient(circle, #1A6FAE 1.4px, transparent 1.6px);
+  background-size: 5px 5px;
+  border-bottom: 4px solid var(--logo-orange);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* the diamonds: white squares with an orange border, turned 45 degrees */
+.frieze i {
+  width: 8px;
+  height: 8px;
+  background: #FFFFFF;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 2px var(--logo-orange);
+}
+
+/* the name sign: Knicks blue with little round tiles */
+.station-sign {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 4px clamp(12px, 2.4vw, 20px);
+  background-color: var(--accent);
+  background-image: radial-gradient(circle, #1F7CC2 1.3px, transparent 1.6px);
+  background-size: 4px 4px;
+  border: 3px solid var(--accent-dark);
+}
+
+/* the words: orange, cut into tiny squares so they look tiled.
+   "background-clip: text" = the background only shows inside the letters */
+.station-sign span {
+  font: 400 clamp(14px, 2vw, 20px) var(--font-heading);
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  color: transparent;
+  background-color: var(--logo-orange);
+  background-image:
+    linear-gradient(90deg, transparent 4px, rgba(120, 50, 0, 0.35) 4px),
+    linear-gradient(transparent 4px, rgba(120, 50, 0, 0.35) 4px);
+  background-size: 5px 5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 1px 0 rgba(0, 40, 70, 0.6));   /* small shadow so the orange pops */
+}
+
+/* --- the train --- */
+.track {
+  padding: 0 6px;
+}
+
+.train-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* computer: show the long train. phone: show the short one (see the bottom of this file) */
+.train-phone,
+.platform-labels {
+  display: none;
+}
+
+/* the colors of each part of the train (these are SVG classes) */
+.t-body       { fill: url(#t-steel); stroke: #7E858D; stroke-width: 2; }
+.t-roof       { stroke: #B5BBC2; stroke-width: 2; }
+.t-vent       { fill: #B9BFC5; stroke: #7E858D; stroke-width: 2; }
+.t-flute      { stroke: rgba(0, 0, 0, 0.12); stroke-width: 1.5; }
+.t-under      { fill: #3A3F45; }
+.t-box        { fill: #2B3035; }
+.t-truck      { fill: #2B3035; }
+.t-blue       { fill: var(--accent); }
+.t-orange     { fill: var(--logo-orange); }
+.t-cap        { fill: url(#t-cap-steel); stroke: #7E858D; stroke-width: 2; }
+.t-capglass   { fill: url(#t-glass); }
+.t-red        { fill: #E0463C; }
+.t-headlight  { fill: #FFF6D6; }
+.t-bumper     { fill: #8A9199; stroke: #6E757D; }
+.t-gang       { fill: #3C4248; }
+.t-coupler    { fill: #5C636B; }
+
+/* the big window that shows each number */
+.t-statwin         { fill: #FFFFFF; stroke: #4A5058; stroke-width: 6; }
+.t-statwin.main    { stroke: var(--logo-orange); }     /* Meals served gets an orange frame */
+.t-statwin-in      { fill: none; stroke: #E2EAF2; stroke-width: 2; }
+
+/* the numbers and labels. in SVG, "fill" is the text color */
+.t-num {
+  font: 400 52px var(--font-heading);
+  fill: var(--text);
+  text-anchor: middle;            /* centers the text on its x spot */
+}
+.t-num.main {
+  font-size: 60px;
+  fill: var(--accent);
+}
+.t-label {
+  font: 700 21px var(--font-body);
+  letter-spacing: 2px;
+  fill: var(--text-soft);
+  text-anchor: middle;
+}
+
+/* the wheels spin around their own center */
+.spin {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* the rail under the train: brown wooden ties on dark gravel */
+.rail {
+  height: 10px;
+  background:
+    repeating-linear-gradient(90deg, #6B4E37 0 10px, transparent 10px 26px),
+    #3A3F45;
+  border-top: 3px solid #9AA2AA;
+}
+
+/* the yellow platform edge with the labels (phone only) */
+.platform-labels {
+  grid-template-columns: repeat(3, 1fr);   /* 3 equal columns, one under each car */
+  padding: 8px 6px 10px;
+  background: #F2C200;
+  border-top: 3px solid var(--text);
+  font: 700 11px var(--font-body);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.platform-labels .main {
+  color: var(--accent-dark);
+}
+
+/* --- the animation ---
+   JavaScript adds "ready" when the page loads,
+   then "go" when you scroll down to the station.
+   (if JavaScript is off, everything just shows, no animation) */
+
+/* ready: the sign is hidden and the train waits off the RIGHT edge */
+.station.ready .station-sign {
+  clip-path: inset(0 0 0 100%);
+}
+.station.ready .train {
+  transform: translateX(115%);
+}
+
+/* go: the sign slides in, then the train pulls in */
+.station.go .station-sign {
+  animation: sign-in 0.9s ease-out forwards;
+}
+.station.go .train {
+  animation: pull-in 2.6s 0.5s cubic-bezier(.2, .7, .25, 1) forwards;
+}
+.station.go .spin {
+  animation: spin 0.45s linear 6 0.5s;    /* spins 6 times, while the train moves */
+}
+.station.go .t-headlight {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes sign-in {
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes pull-in {
+  0%   { transform: translateX(115%); }
+  88%  { transform: translateX(-1.2%); }   /* rolls a tiny bit past the stop */
+  100% { transform: translateX(0); }       /* then settles back, like brakes */
+}
+@keyframes spin {
+  to { transform: rotate(-360deg); }       /* going left = wheels turn the other way */
+}
+@keyframes glow {
+  to { fill: #FFE07A; }
+}
+
+/* =========================================================
    FOOTER
+   same 3-column grid as the header, so the links are truly centered
    ========================================================= */
 .site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 20px;
   padding-top: 18px;
@@ -325,9 +596,23 @@ main > section,
   font-size: 18px;
 }
 
+/* "FeedTheBlock" in black, stuck to the left */
+.footer-name-left {
+  justify-self: start;
+  color: #000000;
+}
+
+/* "NYC" in orange, stuck to the right */
+.footer-name-right {
+  justify-self: end;
+  color: var(--logo-orange);
+}
+
 .footer-links {
+  justify-self: center;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px 24px;
 }
 
@@ -341,6 +626,31 @@ main > section,
 }
 
 /* =========================================================
+   REDUCED MOTION
+   some people turn off animations in their computer settings
+   (they can get dizzy). we respect that: everything just shows up
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .skyline .win {
+    animation: none;
+    fill: var(--logo-orange);
+  }
+
+  .station.ready .station-sign,
+  .station.ready .train {
+    clip-path: none;
+    transform: none;
+  }
+
+  .station.go .station-sign,
+  .station.go .train,
+  .station.go .spin,
+  .station.go .t-headlight {
+    animation: none;
+  }
+}
+
+/* =========================================================
    SMALLER SCREENS (tablets and phones)
    (@media = "only use these rules when...")
    ========================================================= */
@@ -350,8 +660,7 @@ main > section,
     --edge-space: 20px;
   }
 
-  /* with 3 things in the nav bar, they get crowded sooner,
-     so under 900px we stack them: logo, then menu, then language */
+  /* under 900px we stack the nav bar: logo, then menu, then language */
   .site-header {
     grid-template-columns: 1fr;
     justify-items: center;
@@ -360,5 +669,63 @@ main > section,
   .logo,
   .language-picker {
     justify-self: center;
+  }
+
+  /* footer: both name parts on row 1 (hugging in the middle), links on row 2 */
+  .site-footer {
+    grid-template-columns: auto auto;
+    justify-content: center;
+    column-gap: 8px;
+    row-gap: 12px;
+  }
+
+  .footer-name-left {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .footer-name-right {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .footer-links {
+    grid-column: 1 / -1;     /* stretch across both columns */
+    grid-row: 2;
+    justify-self: center;
+  }
+
+  .hero-text .skyline-caption {
+    font-size: 18px;
+  }
+}
+
+/* PHONES: swap to the short train with labels on the platform */
+@media (max-width: 600px) {
+  .train-computer {
+    display: none;
+  }
+
+  .train-phone {
+    display: block;
+  }
+
+  .platform-labels {
+    display: grid;
+  }
+
+  /* bigger numbers in the phone train (it has no labels inside) */
+  .train-phone .t-num      { font-size: 44px; }
+  .train-phone .t-num.main { font-size: 56px; }
+
+  .frieze {
+    height: 16px;
+  }
+
+  .frieze i {
+    width: 8px;
+    height: 8px;
   }
 }

@@ -16,8 +16,8 @@
     <!-- ===== HEADER: logo (left), menu (center), language (right) ===== -->
     <header class="site-header">
 
-      <!-- LEFT: CHANGED: the icon version of the logo (no text),
-           so it's easy to see even when it's small -->
+      <!-- LEFT: the icon version of the logo (no text),
+           so it's easy to see even when it's small. clicking it goes home -->
       <a href="index.html" class="logo">
         <img src="images/logo-icon.png" alt="FeedTheBlock NYC home" width="60">
       </a>
@@ -79,13 +79,229 @@
           <p class="tagline">Feeding NYC's unhoused neighbors, one food run at a time.</p>
 
           <!-- paragraph 1: the feeling every New Yorker knows -->
-          <p>Ever walked past someone on the streets asking for a dollar and hesitated, not sure where that dollar would really go? <br><b>We understand that most of us want to help. We just want to know our money is actually doing some good.</b> </p>
+          <p>Ever walked past someone on the streets asking for a dollar and hesitated, not sure where that dollar would really go?<br><strong>We understand that most of us want to help. We just want to know our money is actually doing some good.</strong></p>
+
+          <!-- skyline divider.
+               it's drawn with SVG (a picture made from code).
+               the little "win" rectangles are windows that light up orange -->
+          <div class="skyline-block">
+            <svg class="skyline" viewBox="0 0 1100 130" role="img" aria-label="New York City skyline with lights turning on">
+              <!-- the buildings: one big dark shape -->
+              <path fill="#2A1E14" d="M0 130 V96 H40 V70 H70 V96 H96 V54 H130 V96 H150 V80 H176 V40 H186 V24 H196 V40 H210 V96 H240 V66 H280 V96 H300 V50 H336 V96 H360 V84 H392 V30 H404 V14 H414 V30 H430 V96 H458 V60 H500 V96 H520 V76 H556 V44 H590 V96 H612 V68 H648 V96 H670 V36 H682 V20 H692 V36 H706 V96 H730 V72 H768 V96 H790 V52 H826 V96 H846 V82 H880 V46 H916 V96 H940 V64 H976 V96 H998 V40 H1034 V96 H1060 V78 H1100 V130 Z"></path>
+              <!-- the windows: x and y = where each one sits -->
+              <g>
+                <rect class="win" x="104" y="64" width="8" height="10"></rect><rect class="win" x="116" y="80" width="8" height="10"></rect>
+                <rect class="win" x="184" y="50" width="8" height="10"></rect><rect class="win" x="196" y="70" width="8" height="10"></rect>
+                <rect class="win" x="250" y="76" width="8" height="10"></rect><rect class="win" x="264" y="76" width="8" height="10"></rect>
+                <rect class="win" x="310" y="60" width="8" height="10"></rect><rect class="win" x="322" y="80" width="8" height="10"></rect>
+                <rect class="win" x="400" y="40" width="8" height="10"></rect><rect class="win" x="412" y="62" width="8" height="10"></rect>
+                <rect class="win" x="470" y="70" width="8" height="10"></rect><rect class="win" x="484" y="70" width="8" height="10"></rect>
+                <rect class="win" x="566" y="54" width="8" height="10"></rect><rect class="win" x="578" y="76" width="8" height="10"></rect>
+                <rect class="win" x="676" y="46" width="8" height="10"></rect><rect class="win" x="690" y="70" width="8" height="10"></rect>
+                <rect class="win" x="800" y="62" width="8" height="10"></rect><rect class="win" x="812" y="80" width="8" height="10"></rect>
+                <rect class="win" x="890" y="56" width="8" height="10"></rect><rect class="win" x="902" y="78" width="8" height="10"></rect>
+                <rect class="win" x="1008" y="50" width="8" height="10"></rect><rect class="win" x="1020" y="72" width="8" height="10"></rect>
+              </g>
+            </svg>
+
+            <!-- the caption under the skyline: black, orange, blue -->
+            <p class="skyline-caption">
+              <span class="caption-black">Full Transparency.</span>
+              <span class="caption-orange">Every meal is posted.</span>
+              <span class="caption-blue">Every dollar is shown.</span>
+            </p>
+          </div>
 
           <!-- paragraph 2: what we do about it -->
-          <p>That's why we started FeedTheBlock NYC. You give, we buy real food and we hand it out ourselves to our unhoused neighbors.<br> <b>No middleman, no guessing. Every food run gets posted with photos and receipts, so you see exactly where your money went.</b></p>
+          <p>You donate, we buy real food and we hand it out ourselves to our unhoused neighbors.<br><strong> Every food run gets posted with photos and receipts, so you see exactly where your money went.</strong></p>
+
+          <!-- ===== NEW: FOOD SECURITY AVE (the stats station) =====
+               a subway train pulls into the station.
+               each car's window shows one number.
+               TO UPDATE THE NUMBERS: change them in BOTH trains below
+               (the computer train and the phone train).
+               "data-to" = the number to count up to,
+               and the text inside the tag = what shows if JavaScript is off -->
+          <div class="station">
+
+            <!-- SHARED PARTS: drawn once here, reused many times with <use>.
+                 this svg is 0 x 0, so you never see it by itself -->
+            <svg class="train-parts" width="0" height="0" aria-hidden="true" focusable="false">
+              <defs>
+                <!-- silver steel colors (top is lighter, bottom is darker) -->
+                <linearGradient id="t-steel" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#EEF0F2"/><stop offset="0.45" stop-color="#CDD2D7"/><stop offset="1" stop-color="#A7AEB5"/>
+                </linearGradient>
+                <linearGradient id="t-steel-door" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#E3E6E9"/><stop offset="1" stop-color="#B3B9BF"/>
+                </linearGradient>
+                <linearGradient id="t-glass" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#7F95A8"/><stop offset="0.5" stop-color="#4A5D6E"/><stop offset="1" stop-color="#2C3A47"/>
+                </linearGradient>
+                <linearGradient id="t-cap-steel" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#8E959D"/><stop offset="1" stop-color="#B7BDC3"/>
+                </linearGradient>
+
+                <!-- one subway window: dark glass, a shine line, and the bar near the bottom -->
+                <symbol id="t-pane" viewBox="0 0 28 64" preserveAspectRatio="none">
+                  <rect x="1.5" y="1.5" width="25" height="61" rx="5" fill="url(#t-glass)" stroke="#4A5058" stroke-width="3"/>
+                  <path d="M6 34 L16 7" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="4" stroke-linecap="round"/>
+                  <line x1="2" y1="46" x2="26" y2="46" stroke="#4A5058" stroke-width="3"/>
+                </symbol>
+
+                <!-- a pair of sliding doors, each with a tall narrow window -->
+                <symbol id="t-doors" viewBox="0 0 56 128" preserveAspectRatio="none">
+                  <rect x="1" y="1" width="27" height="126" fill="url(#t-steel-door)" stroke="#6E757D" stroke-width="2"/>
+                  <rect x="28" y="1" width="27" height="126" fill="url(#t-steel-door)" stroke="#6E757D" stroke-width="2"/>
+                  <use href="#t-pane" x="6" y="12" width="16" height="54"/>
+                  <use href="#t-pane" x="34" y="12" width="16" height="54"/>
+                  <line x1="28" y1="0" x2="28" y2="128" stroke="#4A5058" stroke-width="3"/>
+                </symbol>
+
+                <!-- one wheel, with a cross so you can see it spin -->
+                <symbol id="t-wheel" viewBox="-18 -18 36 36">
+                  <circle r="15" fill="#23282D" stroke="#5E666E" stroke-width="4"/>
+                  <line x1="-11" y1="0" x2="11" y2="0" stroke="#9AA2AA" stroke-width="3"/>
+                  <line x1="0" y1="-11" x2="0" y2="11" stroke="#9AA2AA" stroke-width="3"/>
+                  <circle r="3" fill="#9AA2AA"/>
+                </symbol>
+              </defs>
+            </svg>
+
+            <!-- the mosaic strip at the top, with 3 diamonds -->
+            <div class="frieze" aria-hidden="true"><i></i><i></i><i></i></div>
+
+            <!-- the station name sign -->
+            <h2 class="station-sign"><span>FOOD SECURITY AVE</span></h2>
+
+            <!-- the train. it drives in from the right -->
+            <div class="track">
+              <div class="train">
+
+                <!-- COMPUTER TRAIN: long cars, full details, labels inside the windows -->
+                <svg class="train-svg train-computer" viewBox="0 20 2214 205" role="img" aria-label="Donations: 48. Meals served: 120. Total raised: $1,250.">
+                  <!-- FRONT CAR: donations -->
+                  <rect class="t-under" x="66" y="178" width="630" height="16"/>
+                  <rect class="t-box" rx="2" x="281.6" y="184" width="85.2" height="16"/><rect class="t-box" rx="2" x="395.2" y="184" width="85.2" height="16"/>
+                  <rect class="t-truck" rx="3" x="52" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="54" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="110" y="188" width="36" height="36"/>
+                  <rect class="t-truck" rx="3" x="614" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="616" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="672" y="188" width="36" height="36"/>
+                  <path class="t-body" d="M26 180 V56 Q26 30 52 30 H726 Q736 30 736 40 V180 Z"/>
+                  <line class="t-roof" x1="52" y1="38" x2="726" y2="38"/><rect class="t-vent" rx="3" x="324.2" y="24" width="113.6" height="8"/>
+                  <line class="t-flute" x1="28" y1="170" x2="734" y2="170"/><line class="t-flute" x1="28" y1="175" x2="734" y2="175"/>
+                  <use href="#t-pane" x="40" y="60" width="28" height="64"/>
+                  <use href="#t-pane" x="150" y="60" width="40" height="64"/><use href="#t-pane" x="608" y="60" width="40" height="64"/>
+                  <use href="#t-doors" x="78" y="50" width="56" height="128"/><use href="#t-doors" x="206" y="50" width="56" height="128"/><use href="#t-doors" x="536" y="50" width="56" height="128"/><use href="#t-doors" x="664" y="50" width="56" height="128"/>
+                  <rect class="t-blue" x="27" y="152" width="708" height="9"/><rect class="t-orange" x="27" y="161" width="708" height="3"/>
+                  <rect class="t-statwin" x="276" y="48" width="246" height="98" rx="12"/><rect class="t-statwin-in" x="283" y="55" width="232" height="84" rx="7"/>
+                  <text class="t-num" x="399" y="104" data-to="48">48</text>
+                  <text class="t-label" x="399" y="132">DONATIONS</text>
+                  <path class="t-cap" d="M26 56 Q20 40 10 52 V180 H26 Z"/><rect class="t-capglass" rx="3" x="13" y="64" width="9" height="40"/>
+                  <circle class="t-red" cx="17" cy="122" r="4"/><circle class="t-headlight" cx="17" cy="140" r="5"/><rect class="t-bumper" rx="2" x="4" y="176" width="54" height="8"/>
+                  <!-- rubber connector between cars -->
+                  <rect class="t-gang" x="736" y="62" width="16" height="110"/><rect class="t-coupler" rx="2" x="730" y="186" width="28" height="8"/>
+                  <!-- MIDDLE CAR: meals served -->
+                  <rect class="t-under" x="792" y="178" width="630" height="16"/>
+                  <rect class="t-box" rx="2" x="1007.6" y="184" width="85.2" height="16"/><rect class="t-box" rx="2" x="1121.2" y="184" width="85.2" height="16"/>
+                  <rect class="t-truck" rx="3" x="778" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="780" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="836" y="188" width="36" height="36"/>
+                  <rect class="t-truck" rx="3" x="1340" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="1342" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="1398" y="188" width="36" height="36"/>
+                  <path class="t-body" d="M752 180 V40 Q752 30 762 30 H1452 Q1462 30 1462 40 V180 Z"/>
+                  <line class="t-roof" x1="762" y1="38" x2="1452" y2="38"/><rect class="t-vent" rx="3" x="1050.2" y="24" width="113.6" height="8"/>
+                  <line class="t-flute" x1="754" y1="170" x2="1460" y2="170"/><line class="t-flute" x1="754" y1="175" x2="1460" y2="175"/>
+                  <use href="#t-pane" x="842" y="60" width="40" height="64"/><use href="#t-pane" x="1332" y="60" width="40" height="64"/>
+                  <use href="#t-doors" x="770" y="50" width="56" height="128"/><use href="#t-doors" x="898" y="50" width="56" height="128"/><use href="#t-doors" x="1260" y="50" width="56" height="128"/><use href="#t-doors" x="1388" y="50" width="56" height="128"/>
+                  <rect class="t-blue" x="753" y="152" width="708" height="9"/><rect class="t-orange" x="753" y="161" width="708" height="3"/>
+                  <rect class="t-statwin main" x="968" y="48" width="278" height="98" rx="12"/><rect class="t-statwin-in" x="975" y="55" width="264" height="84" rx="7"/>
+                  <text class="t-num main" x="1107" y="104" data-to="120">120</text>
+                  <text class="t-label" x="1107" y="132">MEALS SERVED</text>
+                  <!-- rubber connector between cars -->
+                  <rect class="t-gang" x="1462" y="62" width="16" height="110"/><rect class="t-coupler" rx="2" x="1456" y="186" width="28" height="8"/>
+                  <!-- BACK CAR: total raised -->
+                  <rect class="t-under" x="1518" y="178" width="630" height="16"/>
+                  <rect class="t-box" rx="2" x="1733.6" y="184" width="85.2" height="16"/><rect class="t-box" rx="2" x="1847.2" y="184" width="85.2" height="16"/>
+                  <rect class="t-truck" rx="3" x="1504" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="1506" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="1562" y="188" width="36" height="36"/>
+                  <rect class="t-truck" rx="3" x="2066" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="2068" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="2124" y="188" width="36" height="36"/>
+                  <path class="t-body" d="M1478 180 V40 Q1478 30 1488 30 H2162 Q2188 30 2188 56 V180 Z"/>
+                  <line class="t-roof" x1="1488" y1="38" x2="2162" y2="38"/><rect class="t-vent" rx="3" x="1776.2" y="24" width="113.6" height="8"/>
+                  <line class="t-flute" x1="1480" y1="170" x2="2186" y2="170"/><line class="t-flute" x1="1480" y1="175" x2="2186" y2="175"/>
+                  <use href="#t-pane" x="2146" y="60" width="28" height="64"/>
+                  <use href="#t-pane" x="1566" y="60" width="40" height="64"/><use href="#t-pane" x="2024" y="60" width="40" height="64"/>
+                  <use href="#t-doors" x="1494" y="50" width="56" height="128"/><use href="#t-doors" x="1622" y="50" width="56" height="128"/><use href="#t-doors" x="1952" y="50" width="56" height="128"/><use href="#t-doors" x="2080" y="50" width="56" height="128"/>
+                  <rect class="t-blue" x="1479" y="152" width="708" height="9"/><rect class="t-orange" x="1479" y="161" width="708" height="3"/>
+                  <rect class="t-statwin" x="1692" y="48" width="246" height="98" rx="12"/><rect class="t-statwin-in" x="1699" y="55" width="232" height="84" rx="7"/>
+                  <text class="t-num" x="1815" y="104" data-to="1250" data-money="1">$1,250</text>
+                  <text class="t-label" x="1815" y="132">TOTAL RAISED</text>
+                  <path class="t-cap" d="M2188 56 Q2194 40 2204 52 V180 H2188 Z"/><rect class="t-capglass" rx="3" x="2192" y="64" width="9" height="40"/>
+                  <circle class="t-red" cx="2197" cy="122" r="4"/><circle class="t-red" cx="2197" cy="140" r="5"/><rect class="t-bumper" rx="2" x="2156" y="176" width="54" height="8"/>
+                </svg>
+
+                <!-- PHONE TRAIN: shorter cars, only the numbers in the windows -->
+                <svg class="train-svg train-phone" viewBox="0 20 976 205" role="img" aria-label="Donations: 48. Meals served: 120. Total raised: $1,250.">
+                  <!-- FRONT CAR: donations -->
+                  <rect class="t-under" x="66" y="178" width="220" height="16"/>
+                  <rect class="t-box" rx="2" x="134" y="184" width="36" height="16"/><rect class="t-box" rx="2" x="182" y="184" width="36" height="16"/>
+                  <rect class="t-truck" rx="3" x="52" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="54" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="110" y="188" width="36" height="36"/>
+                  <rect class="t-truck" rx="3" x="204" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="206" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="262" y="188" width="36" height="36"/>
+                  <path class="t-body" d="M26 180 V56 Q26 30 52 30 H316 Q326 30 326 40 V180 Z"/>
+                  <line class="t-roof" x1="52" y1="38" x2="316" y2="38"/><rect class="t-vent" rx="3" x="152" y="24" width="48" height="8"/>
+                  <line class="t-flute" x1="28" y1="170" x2="324" y2="170"/><line class="t-flute" x1="28" y1="175" x2="324" y2="175"/>
+                  <use href="#t-doors" x="34" y="50" width="30" height="128"/><use href="#t-doors" x="288" y="50" width="30" height="128"/>
+                  <rect class="t-blue" x="27" y="152" width="298" height="9"/><rect class="t-orange" x="27" y="161" width="298" height="3"/>
+                  <rect class="t-statwin" x="72" y="48" width="208" height="98" rx="12"/><rect class="t-statwin-in" x="79" y="55" width="194" height="84" rx="7"/>
+                  <text class="t-num" x="176" y="118" data-to="48">48</text>
+                  <path class="t-cap" d="M26 56 Q20 40 10 52 V180 H26 Z"/><rect class="t-capglass" rx="3" x="13" y="64" width="9" height="40"/>
+                  <circle class="t-red" cx="17" cy="122" r="4"/><circle class="t-headlight" cx="17" cy="140" r="5"/><rect class="t-bumper" rx="2" x="4" y="176" width="54" height="8"/>
+                  <!-- rubber connector between cars -->
+                  <rect class="t-gang" x="326" y="62" width="12" height="110"/><rect class="t-coupler" rx="2" x="320" y="186" width="24" height="8"/>
+                  <!-- MIDDLE CAR: meals served -->
+                  <rect class="t-under" x="378" y="178" width="220" height="16"/>
+                  <rect class="t-box" rx="2" x="446" y="184" width="36" height="16"/><rect class="t-box" rx="2" x="494" y="184" width="36" height="16"/>
+                  <rect class="t-truck" rx="3" x="364" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="366" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="422" y="188" width="36" height="36"/>
+                  <rect class="t-truck" rx="3" x="516" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="518" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="574" y="188" width="36" height="36"/>
+                  <path class="t-body" d="M338 180 V40 Q338 30 348 30 H628 Q638 30 638 40 V180 Z"/>
+                  <line class="t-roof" x1="348" y1="38" x2="628" y2="38"/><rect class="t-vent" rx="3" x="464" y="24" width="48" height="8"/>
+                  <line class="t-flute" x1="340" y1="170" x2="636" y2="170"/><line class="t-flute" x1="340" y1="175" x2="636" y2="175"/>
+                  <use href="#t-doors" x="346" y="50" width="30" height="128"/><use href="#t-doors" x="600" y="50" width="30" height="128"/>
+                  <rect class="t-blue" x="339" y="152" width="298" height="9"/><rect class="t-orange" x="339" y="161" width="298" height="3"/>
+                  <rect class="t-statwin main" x="384" y="48" width="208" height="98" rx="12"/><rect class="t-statwin-in" x="391" y="55" width="194" height="84" rx="7"/>
+                  <text class="t-num main" x="488" y="118" data-to="120">120</text>
+                  <!-- rubber connector between cars -->
+                  <rect class="t-gang" x="638" y="62" width="12" height="110"/><rect class="t-coupler" rx="2" x="632" y="186" width="24" height="8"/>
+                  <!-- BACK CAR: total raised -->
+                  <rect class="t-under" x="690" y="178" width="220" height="16"/>
+                  <rect class="t-box" rx="2" x="758" y="184" width="36" height="16"/><rect class="t-box" rx="2" x="806" y="184" width="36" height="16"/>
+                  <rect class="t-truck" rx="3" x="676" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="678" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="734" y="188" width="36" height="36"/>
+                  <rect class="t-truck" rx="3" x="828" y="186" width="96" height="14"/><use href="#t-wheel" class="spin" x="830" y="188" width="36" height="36"/><use href="#t-wheel" class="spin" x="886" y="188" width="36" height="36"/>
+                  <path class="t-body" d="M650 180 V40 Q650 30 660 30 H924 Q950 30 950 56 V180 Z"/>
+                  <line class="t-roof" x1="660" y1="38" x2="924" y2="38"/><rect class="t-vent" rx="3" x="776" y="24" width="48" height="8"/>
+                  <line class="t-flute" x1="652" y1="170" x2="948" y2="170"/><line class="t-flute" x1="652" y1="175" x2="948" y2="175"/>
+                  <use href="#t-doors" x="658" y="50" width="30" height="128"/><use href="#t-doors" x="912" y="50" width="30" height="128"/>
+                  <rect class="t-blue" x="651" y="152" width="298" height="9"/><rect class="t-orange" x="651" y="161" width="298" height="3"/>
+                  <rect class="t-statwin" x="696" y="48" width="208" height="98" rx="12"/><rect class="t-statwin-in" x="703" y="55" width="194" height="84" rx="7"/>
+                  <text class="t-num" x="800" y="118" data-to="1250" data-money="1">$1,250</text>
+                  <path class="t-cap" d="M950 56 Q956 40 966 52 V180 H950 Z"/><rect class="t-capglass" rx="3" x="954" y="64" width="9" height="40"/>
+                  <circle class="t-red" cx="959" cy="122" r="4"/><circle class="t-red" cx="959" cy="140" r="5"/><rect class="t-bumper" rx="2" x="918" y="176" width="54" height="8"/>
+                </svg>
+
+              </div>
+            </div>
+
+            <!-- the rail under the train -->
+            <div class="rail" aria-hidden="true"></div>
+
+            <!-- PHONE ONLY: the labels on the yellow platform edge -->
+            <div class="platform-labels" aria-hidden="true">
+              <span>Donations</span>
+              <span class="main">Meals served</span>
+              <span>Total raised</span>
+            </div>
+
+          </div>
 
           <!-- paragraph 3: who we are -->
-          <p>We're New Yorkers looking out for New Yorkers, <b>powered by people who believe a simple meal can make someone's day better.</b></p>
+          <p>We're New Yorkers looking out for New Yorkers, <strong>powered by people who believe a simple meal can make someone's day better.</strong></p>
+
+          <!-- NEW: donate button, same look as the one in the nav bar -->
+          <a href="donate.html" class="button donate-cta">Donate</a>
 
           <!-- the challenge, in bold -->
           <p class="challenge">Our challenge to New York: give so much that we can't keep up.</p>
@@ -95,16 +311,22 @@
 
     </main>
 
-    <!-- ===== FOOTER: same on every page ===== -->
+    <!-- ===== FOOTER: same on every page =====
+         the name is split: "FeedTheBlock" on the left, "NYC" on the right,
+         with the links in the middle -->
     <footer class="site-footer">
-      <span class="footer-name">FeedTheBlock <span class="accent-text">NYC</span></span>
+      <span class="footer-name footer-name-left">FeedTheBlock</span>
       <div class="footer-links">
         <a href="https://www.instagram.com/feedtheblocknyc">Instagram</a>
-        <a href="https://www.facebook.com/feedtheblocknyc">Facebook</a>
         <a href="mailto:FeedTheBlockNYC@gmail.com">FeedTheBlockNYC@gmail.com</a>
+        <a href="https://www.facebook.com/feedtheblocknyc">Facebook</a>
       </div>
-      <span>&copy; 2026 FeedTheBlock <span class="accent-text">NYC</span></span>
+      <span class="footer-name footer-name-right">NYC</span>
     </footer>
+
+    <!-- our JavaScript. it goes at the very end,
+         so the page shows up first, then the animation starts -->
+    <script src="js/stats.js"></script>
 
   </body>
 </html>
