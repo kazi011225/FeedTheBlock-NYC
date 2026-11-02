@@ -142,8 +142,9 @@ main > section,
 /* the Donate button under paragraph 3, on the cream page:
    white with a Knicks blue outline, turns orange on hover (from .button above) */
 .donate-cta {
-  min-height: 42px;           /* a bit slimmer than the normal button */
-  padding: 0 24px;
+  min-height: 36px;           /* smaller than the normal button */
+  padding: 0 22px;
+  font-size: 16px;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -272,10 +273,11 @@ main > section,
 
 /* everything in the hero is centered */
 .hero {
+  flex: 1;                 /* NEW: the hero fills all the space between header and footer */
   display: flex;
   justify-content: center;
-  padding-top: 10px;
-  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-bottom: 14px;       /* space between the Donate button and the footer */
   text-align: center;
 }
 
@@ -287,7 +289,9 @@ main > section,
   display: flex;
   flex-direction: column;
   align-items: center;     /* center everything inside */
-  gap: 12px;               /* space between each line or paragraph */
+  justify-content: space-evenly;   /* NEW: on tall screens, the extra space is shared
+                                      evenly between the sections, not piled at the bottom */
+  gap: 10px;               /* the smallest space between each line or paragraph */
 }
 
 /* the big name "FeedTheBlock NYC" */
@@ -575,6 +579,7 @@ main > section,
 .bars {
   width: 100%;
   max-width: 1120px;       /* wide, so each quote fits on one line */
+  margin-top: 7px;         /* NEW: extra space above the quotes */
 }
 
 .bars-title {
@@ -594,7 +599,7 @@ main > section,
 .quote-box {
   flex: 1;
   min-width: 0;
-  min-height: 48px;
+  min-height: 46px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -624,17 +629,12 @@ main > section,
   color: var(--accent);
 }
 
-/* the name under the quote: blue for famous people */
+/* the name under the quote, in Knicks blue */
 .hero-text .who {
   margin-top: 0;
   font-size: 14px;
   font-weight: 700;
   color: var(--accent);
-}
-
-/* orange for our own quotes */
-.hero-text .who.ours {
-  color: var(--logo-orange);
 }
 
 /* the slide animations when you click a candy bar */

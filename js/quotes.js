@@ -62,9 +62,6 @@ if (bars) {
     const q = quotes[current];
     quoteText.textContent = q.text;
     quoteWho.textContent = '(' + q.author + ')';
-
-    // our quotes get the orange name
-    quoteWho.classList.toggle('ours', q.author === 'FeedTheBlock NYC');
   }
 
   // moves to the next (+1) or previous (-1) quote, with a slide
