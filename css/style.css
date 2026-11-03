@@ -972,3 +972,180 @@ main > section,
     height: 8px;
   }
 }
+
+/* =========================================================
+   NEW: PHONE UPGRADES
+   everything below only changes phones.
+   computers look exactly the same as before
+   ========================================================= */
+
+/* the ☰ menu button and the sticky Donate button are hidden by default
+   (so computers and tablets never see them) */
+.menu-toggle,
+.sticky-donate {
+  display: none;
+}
+
+@media (max-width: 600px) {
+
+  /* --- 1. slim header: logo on the left, ☰ on the right --- */
+  .site-header {
+    grid-template-columns: auto 1fr;   /* logo | menu button */
+    justify-items: stretch;
+    row-gap: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .logo {
+    justify-self: start;
+  }
+
+  .logo img {
+    width: 44px;                       /* a bit smaller, so the bar stays slim */
+  }
+
+  /* the ☰ button: three white lines */
+  .menu-toggle {
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 10px;
+    border: 2px solid #FFFFFF;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 3px;
+    border-radius: 2px;
+    background: #FFFFFF;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  /* when the menu is open, the 3 lines turn into an X */
+  .menu-open .menu-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  .menu-open .menu-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* the menu links and the language picker are hidden until you tap ☰ */
+  .main-nav,
+  .language-picker {
+    display: none;
+    grid-column: 1 / -1;               /* full width, under the logo row */
+  }
+
+  /* menu open: links stack on top of each other */
+  .menu-open .main-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .menu-open .main-nav a {
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 17px;
+  }
+
+  .menu-open .main-nav .button {
+    margin: 12px auto 4px;
+    padding: 0 40px;
+    border-top: 2px solid #FFFFFF;
+  }
+
+  .menu-open .language-picker {
+    display: flex;
+    justify-self: center;
+    margin: 8px 0 6px;
+  }
+
+  /* --- 2. the sticky Donate button at the bottom of the screen --- */
+  .sticky-donate {
+    display: inline-flex;
+    position: fixed;                   /* stays in place while you scroll */
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    z-index: 10;                       /* on top of everything */
+    min-height: 50px;
+    padding: 0 44px;
+    background: var(--accent);
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+    font-size: 17px;
+    box-shadow: 0 6px 18px rgba(0, 40, 70, 0.3);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  /* JavaScript adds "is-hidden" when the real Donate button is on screen */
+  .sticky-donate.is-hidden {
+    opacity: 0;
+    pointer-events: none;              /* can't tap it while it's invisible */
+    transform: translate(-50%, 20px);  /* slides down a little as it fades */
+  }
+
+  /* --- 3. story paragraphs: a bit smaller, more space between parts --- */
+  .hero-text {
+    gap: 22px;
+  }
+
+  .hero-text > p.story {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* a little space between the regular line and the bold line */
+  .hero-text > p.story strong {
+    display: inline-block;
+    margin-top: 6px;
+  }
+
+  /* --- 4. bigger station sign --- */
+  .station-sign span {
+    font-size: 17px;
+  }
+
+  /* the labels under the train: a white box,
+     with a colored line on top of each label (blue, orange, blue) */
+  .platform-labels {
+    padding: 10px 4px 12px;
+    background: #FFFFFF;
+    border-top: 3px solid #9AA2AA;     /* gray line under the rail */
+    font-size: 11px;
+    white-space: nowrap;               /* each label stays on one line */
+    color: var(--accent-dark);
+  }
+
+  .platform-labels span {
+    margin: 0 5px;
+    padding-top: 6px;
+    border-top: 4px solid var(--accent);
+  }
+
+  /* Meals served is the main number, so it gets orange */
+  .platform-labels .main {
+    border-top-color: var(--logo-orange);
+    color: var(--logo-orange);
+  }
+
+  /* --- 5. footer: name on top, then each link on its own line --- */
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .site-footer {
+    padding-bottom: 20px;
+  }
+}

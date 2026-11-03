@@ -22,8 +22,14 @@
         <img src="images/logo-icon.png" alt="FeedTheBlock NYC home" width="60">
       </a>
 
+      <!-- NEW: the menu button (☰). PHONES ONLY, computers never see it.
+           JavaScript (js/menu.js) opens and closes the menu when you tap it -->
+      <button type="button" class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="phone-menu">
+        <span></span><span></span><span></span>
+      </button>
+
       <!-- CENTER: the menu -->
-      <nav class="main-nav">
+      <nav class="main-nav" id="phone-menu">
         <a href="index.html">Home</a>
         <a href="purpose.html">Our Purpose</a>
         <a href="impact.html">Impact</a>
@@ -393,10 +399,15 @@
       <span class="footer-name footer-name-right">NYC</span>
     </footer>
 
+    <!-- NEW: the Donate button that sticks to the bottom of the screen.
+         PHONES ONLY. it hides itself when the real Donate button is on screen -->
+    <a href="donate.html" class="button sticky-donate">Donate</a>
+
     <!-- our JavaScript. it goes at the very end,
          so the page shows up first, then the animation starts -->
     <script src="js/stats.js"></script>
     <script src="js/quotes.js"></script>
+    <script src="js/menu.js"></script>
 
   </body>
 </html>
