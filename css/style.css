@@ -142,9 +142,9 @@ main > section,
 /* the Donate button under paragraph 3, on the cream page:
    white with a Knicks blue outline, turns orange on hover (from .button above) */
 .donate-cta {
-  min-height: 36px;           /* smaller than the normal button */
-  padding: 0 22px;
-  font-size: 16px;
+  min-height: 46px;           /* CHANGED: a bit bigger, it's the last "ask" on the page */
+  padding: 0 30px;
+  font-size: 17px;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -276,8 +276,8 @@ main > section,
   flex: 1;                 /* NEW: the hero fills all the space between header and footer */
   display: flex;
   justify-content: center;
-  padding-top: 8px;
-  padding-bottom: 14px;       /* space between the Donate button and the footer */
+  padding-top: 28px;          /* CHANGED: more room under the nav bar */
+  padding-bottom: 40px;       /* CHANGED: more room between the Donate button and the footer */
   text-align: center;
 }
 
@@ -289,22 +289,20 @@ main > section,
   display: flex;
   flex-direction: column;
   align-items: center;     /* center everything inside */
-  justify-content: space-evenly;   /* NEW: on tall screens, the extra space is shared
-                                      evenly between the sections, not piled at the bottom */
-  gap: 10px;               /* the smallest space between each line or paragraph */
+  gap: 18px;               /* CHANGED: more breathing room between each part */
 }
 
 /* the big name "FeedTheBlock NYC" */
 .hero h1 {
-  font-size: 36px;
+  font-size: 48px;         /* CHANGED: bigger, so the name is clearly the most important thing */
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
 }
 
 /* the slogan under the name, in Knicks blue.
    the negative top margin pulls it closer to the name */
 .hero-text .tagline {
-  margin: -6px 0 -2px;
+  margin: -6px 0 0;
   font-size: 20px;
   line-height: 1.6;
   font-weight: 700;
@@ -315,9 +313,31 @@ main > section,
 .hero-text p {
   margin: 0;
   font-size: 17px;
-  line-height: 1.5;
+  line-height: 1.65;
   color: var(--text-soft);
   max-width: var(--text-width);
+}
+
+/* NEW: the 3 story paragraphs.
+   each sentence sits on its own line (the <br> in the HTML),
+   so the regular line sets it up and the bold line lands the point */
+.hero-text > p.story {
+  max-width: none;
+  white-space: nowrap;     /* keep each sentence on one line */
+  font-size: 16px;         /* at 16px the lines are about as wide as the train */
+}
+
+/* the bold lines are darker, so they stand out */
+.hero-text > p.story strong {
+  color: var(--text);
+}
+
+/* screens narrower than 1100px don't have room, so the lines wrap normally */
+@media (max-width: 1100px) {
+  .hero-text > p.story {
+    white-space: normal;
+    max-width: 660px;
+  }
 }
 
 
@@ -620,7 +640,15 @@ main > section,
 .bars {
   width: 100%;
   max-width: 1120px;       /* wide, so each quote fits on one line */
-  margin-top: 7px;         /* NEW: extra space above the quotes */
+  margin: 20px 0 6px;      /* CHANGED: more space above and below the quotes */
+  padding: 14px 0;
+
+  /* NEW: color fade lines above and below, like a magazine pull quote.
+     border-image paints the border with a gradient:
+     clear at the edges, Knicks blue, orange in the middle, blue, clear again */
+  border-width: 3px 0;     /* 3px on top and bottom, 0 on the sides */
+  border-style: solid;
+  border-image: linear-gradient(90deg, transparent, var(--accent) 18%, var(--logo-orange) 50%, var(--accent) 82%, transparent) 1;
 }
 
 .bars-title {
